@@ -1,0 +1,65 @@
+---
+layout: application
+title: Home
+controller: home
+---
+
+{% raw %}
+<section class="bb b--near-white ptm pbl">
+  <div class="mw8" style="margin-right: auto; margin-left: auto; " >
+    <div class="phm">
+    <div class="mb1" soundcloud-player src="https://soundcloud.com/zachhurdmusic/brooklyn-raining">
+      <h3 ng-click="play()"><a href class="dark-gray">{{ response.title }}</a></h3>
+    </div>
+    <div class="mb1" soundcloud-player src="https://soundcloud.com/zachhurdmusic/05-upsidedown">
+      <h3 ng-click="play()"><a href class="dark-gray">{{ response.title }}</a></h3>
+    </div>
+  </div>
+  </div>
+</section>
+<section class="bb b--near-white">
+<div class="mw8 mtx" style="margin-right: auto; margin-left: auto; ">
+  <div class="phm pbx">
+    <h1 class="sans-serif f4 fw4 ttu">Buy</h1>
+    <article class="dib">
+      <a class="f2 b db prm" href="http://www.amazon.com/s/ref=ntt_srch_drd_B000ZNPMAA?ie=UTF8&field-keywords=Zach%20Hurd&index=digital-music&search-type=ss">
+        Amazon
+      </a>
+    </article>
+    <article class="dib">
+      <a class="f2 b db prm" href="https://itunes.apple.com/us/artist/zach-hurd/id292321269?ign-mpt=uo%3D4">
+         iTunes
+      </a>
+    </article>
+    <article class="dib">
+      <a class="f2 b db prm" href="http://www.cdbaby.com/artist/ZachHurd">
+        CDBaby
+      </a>
+    </article>
+  </div>
+</div>
+</section>
+
+<section class="mw8 mtx" style="margin-right: auto; margin-left: auto; ">
+  <div class="phm">
+
+  <h1 class="sans-serif f4 fw4 ttu">About</h1>
+  <img src="img/about.jpg">
+  <p class="f3 f2-ns serif tl lh-copy mtl">
+    Zach Hurd is originally from Maine. After graduating from college, he toured in
+    the duo Causeway, performing at colleges, clubs and festivals across the
+    country. More recently, he has established himself as a solo artist in the New
+    York City music scene, appearing in clubs like The Living Room, The Bitter End,
+    Rockwood Music Hall, and Canal Room.
+  </p>
+</div>
+</section>
+<footer class="pvx bt b--near-white mtxl">
+  <div class="mw8" style="margin-right: auto; margin-left: auto;">
+  <div class="phm">
+    <a href="mailto:zachhurdmusic@gmail.com">zachhurdmusic@gmail.com</a>
+  </div>
+  </div>
+</footer>
+{% endraw %}
+
