@@ -1,23 +1,83 @@
----
-layout: application
-title: Home
-controller: home
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Zach Hurd</title>
+  <meta name="description" content="Create your own custom SoundCloud player with just HTML and CSS. Built with AngularJS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% raw %}
+  <link rel="stylesheet" href="docs/autobass.css"/>
+  <link rel="stylesheet" href="http://mrmrs.io/tachyons/css/i.min.css"/>
+  <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
 
-<section class="bb b--near-white ptm pbl">
-  <div class="mw8" style="margin-right: auto; margin-left: auto; " >
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/0.10.6/vue.min.js"></script>
+  <script src="v-plangular.min.js"></script>
+  <style type="text/css">
+    a:link { text-decoration: none; }
+    a:hover,a:active { text-decoration: underline; }
+
+    
+  </style>
+</head>
+<body id="vm">
+<header class="phm pvxl phx-ns pvxxl-ns bg-cv" style="background:url(img/header-6.jpg) no-repeat;background-size: cover; ">
+  <h1 class="mb0 f1 ttu mega-ns ">Zach Hurd</h1>
+  <a href="https://itunes.apple.com/us/album/she-never-sleeps-ep/id548926022" class="btn pvl phx-ns bg-dark-gray white mtl mtm-ns" style="border-width: 0;"><small class="db-ns">Buy</small> <b class="">she never sleeps</b> ▸ </a>
+  <ul class="list br2 mtl">
+      <li class="dib"><a class="f5 f4-ns black db prxs prs-ns" href="http://twitter.com/zachhurd">@zachhurd</a></li>
+      <li class="dib"><a class="f5 f4-ns black db paxs prs-ns" href="http://soundcloud.com/zachhurdmusic">soundcloud</a></li>
+      <li class="dib"><a class="f5 f4-ns black db paxs prs-ns" href="https://itunes.apple.com/us/artist/zach-hurd/id292321269?ign-mpt=uo%3D4">iTunes</a></li>
+      <li class="dib"><a class="f5 f4-ns black db paxs prs-ns" href="https://play.spotify.com/artist/1f2CFEq5J7ZyeTAVU6ubRX?play=true&utm_source=open.spotify.com&utm_medium=open">spotify</a></li>
+      <li class="dib"><a class="f5 f4-ns black db paxs prs-ns" href="https://www.facebook.com/zachhurdmusic">facebook</a></li>
+      <li class="dib"><a class="f5 f4-ns black db paxs prs-ns" href="http://www.rdio.com/artist/Zach_Hurd/">rdio</a></li>
+      <li class="dib"><a class="f5 f4-ns black db paxs prs-ns" href="http://www.instagram.com/zachhurd">instagram</a></li>
+  </ul>
+</header>
+
+  <section id="examples" class="mw8 centered wi-100 mtl" style="margin-right: auto; margin-left: auto; ">
     <div class="phm">
-    <div class="mb1" soundcloud-player src="https://soundcloud.com/zachhurdmusic/brooklyn-raining">
-      <h3 ng-click="play()"><a href class="dark-gray">{{ response.title }}</a></h3>
+    <div class="bg-near-white ba b--near-white rounded wi-100" v-component="plangular" v-src="'http://soundcloud.com/zachhurdmusic/sets/zach-hurd'">
+      <div class="p2 bg-white">
+        <div class="table">
+          <small class="monospace h6 table-cell nowrap">{{ currentTime | prettyTime }} - {{ duration | prettyTime }}</small>
+        </div>
+        <h1 class="m0">{{ title }}</h1>
+        <div class="table">
+          <div class="table-cell">
+            <button class="button-icon" v-on="click: previous()">
+              <svg v-plangular-icon="'previous'"></svg>
+            </button>
+          </div>
+          <div class="table-cell">
+            <button class="h2 button-icon" v-on="click: playPause(player.playlistIndex)">
+              <svg v-if="player.tracks[player.i] != track || !player.playing" v-plangular-icon="'play'"></svg>
+              <svg v-if="player.tracks[player.i] == track && player.playing" v-plangular-icon="'pause'"></svg>
+            </button>
+          </div>
+          <div class="table-cell">
+            <button class="button-icon" v-on="click: next()">
+              <svg v-plangular-icon="'next'"></svg>
+            </button>
+          </div>
+          <div class="table-cell full-width">
+            <div class="px1">
+              <progress class="" v-on="click: seek($event)" value="{{ currentTime / duration || 0 }}">{{ currentTime / duration }}</progress>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-repeat="t : tracks" class="">
+        <a href="#{{ t.title }}" class="block px2 py1 nav-item"
+          v-on="click: playPause($index)"
+          v-class="player.currentTrack == t ? 'bg-darken-3' : ''">
+         {{ t.title }}
+        </a>
+      </div>
     </div>
-    <div class="mb1" soundcloud-player src="https://soundcloud.com/zachhurdmusic/05-upsidedown">
-      <h3 ng-click="play()"><a href class="dark-gray">{{ response.title }}</a></h3>
-    </div>
+
   </div>
-  </div>
-</section>
+  </section>
+
 <section class="bb b--near-white">
 <div class="mw8 mtx" style="margin-right: auto; margin-left: auto; ">
   <div class="phm pbx clearfix cf">
@@ -27,10 +87,10 @@ controller: home
     <h2 class="f4 fw4">She never sleeps</h2>
     <span class="db f5 pvn">available on</span>
     <article class="db">
-      <a class="f3 b dib prm" href="http://www.amazon.com/s/ref=ntt_srch_drd_B000ZNPMAA?ie=UTF8&field-keywords=Zach%20Hurd&index=digital-music&search-type=ss">
+      <a class="f4 f3-ns b dib prm" href="http://www.amazon.com/s/ref=ntt_srch_drd_B000ZNPMAA?ie=UTF8&field-keywords=Zach%20Hurd&index=digital-music&search-type=ss">
         Amazon
       </a>
-      <a class="f3 b dib prm" href="https://itunes.apple.com/us/artist/zach-hurd/id292321269?ign-mpt=uo%3D4">
+      <a class="f4 f3-ns b dib prm" href="https://itunes.apple.com/us/artist/zach-hurd/id292321269?ign-mpt=uo%3D4">
          iTunes
       </a>
     </article>
@@ -39,10 +99,10 @@ controller: home
     <img src="img/changinglandscapes_cover.jpg" class="wi-100">
     <h2 class="f4 fw4">Changing Landscapes</h2>
     <span class="db f5 pvn">available on</span>
-      <a class="f3 b prm" href="http://www.amazon.com/Changing-Landscapes-Zach-Hurd/dp/B002VRCHXI/ref=tmm_msc_title_0?_encoding=UTF8&amp;sr=8-2&amp;qid=undefined">
+      <a class="f4 f3-ns b prm" href="http://www.amazon.com/Changing-Landscapes-Zach-Hurd/dp/B002VRCHXI/ref=tmm_msc_title_0?_encoding=UTF8&amp;sr=8-2&amp;qid=undefined">
         Amazon
       </a>
-      <a class="f3 b prm" href="https://itunes.apple.com/us/album/changing-landscapes/id338618832">
+      <a class="f4 f3-ns b prm" href="https://itunes.apple.com/us/album/changing-landscapes/id338618832">
          iTunes
       </a>
   </section>
@@ -55,8 +115,10 @@ controller: home
   <h1 class="sans-serif f4 fw4 ttu">About</h1>
   <img src="img/about.jpg">
   <p class="f3 f2-ns serif tl lh-copy mtl">
-    Zach Hurd is a Maine native who has been honing his craft in Brooklyn, NY for the past 7 years. Hurd's 2013 EP, "She Never Sleeps", recently won "Best Pop EP" in the Independent Music Awards. He has continued to broaden his audience through captivating performances and by blurring the lines between folk, soul, pop and americana. After a successful Kickstarter campaign from his fans, Hurd is currently working on his 4th album set to be released this fall.
-  You can find more music on Spotify and iTunes and <a href="www.zachhurd.com">www.zachhurd.com</a>
+    Zach Hurd is a Maine native who has been honing his craft in Brooklyn for the past 7 years.
+    Hurd's 2013 EP, "She Never Sleeps", recently won "Best Pop EP" in the Independent Music Awards.
+    He has continued to broaden his audience through captivating performances and by blurring the lines between folk, soul, pop and americana.
+    After a successful Kickstarter campaign from his fans, Hurd is currently working on his 4th album set to be released this fall.
   </p>
 </div>
 </section>
@@ -65,18 +127,18 @@ controller: home
     <div class="phm">
   <h1 class="sans-serif f4 fw4 ttu">News</h1>
   <article class="mw7 mbl">
-    <h1 class="sans-serif f6 fw9 ttu">05.05.14</h1>
-    <p class="f3 serif">I recently had the pleasure of doing a Q&A with Derek O'Neal from FourCulture Magazine. We talked about the new album, musical influences and bunch of other stuff. Check it out here: ZH - FourCulture Magazine Feature</p>
+    <h1 class="sans-serif f4 fw9">05.05.14</h1>
+    <p class="f4 f3-ns serif lh-copy">I recently had the pleasure of doing a Q&A with Derek O'Neal from FourCulture Magazine. We talked about the new album, musical influences and bunch of other stuff. Check it out here: ZH - FourCulture Magazine Feature</p>
 </article>
 
 <article class="mw7 mbl">
-    <h1 class="sans-serif f6 fw9 ttu">10.23.13</h1>
-  <p class="f3 serif">Thank you all so much for the amazing support over the last few weeks. I've basically been living on Cloud 9 for the past couple of days. THANK YOU! I can't wait to get back into the studio. The fact that we went over the goal is going to make this album that much better. You never know what kind of road blocks you can hit when making, or promoting, an album, so having some financial breathing room is a huge help. I'll definitely be keeping you updated on the progress of the project. Thank you so much for being a part of it. I can't wait to share it with you. Talk to you soon!</p>
+    <h1 class="sans-serif f4 fw9">10.23.13</h1>
+  <p class="f4 f3-ns serif lh-copy">Thank you all so much for the amazing support over the last few weeks. I've basically been living on Cloud 9 for the past couple of days. THANK YOU! I can't wait to get back into the studio. The fact that we went over the goal is going to make this album that much better. You never know what kind of road blocks you can hit when making, or promoting, an album, so having some financial breathing room is a huge help. I'll definitely be keeping you updated on the progress of the project. Thank you so much for being a part of it. I can't wait to share it with you. Talk to you soon!</p>
 
 </article>
 <article class="mw7">
-  <h1 class="sans-serif f6 fw9 ttu">09.20.13</h1>
-  <p class="f3 serif">I've been working on my 4th album over the past few months and now it's ready for the studio. I'm really excited about this one. For those of you who don't know, and I'm sure most of you do, making an album can be a big challenge financially. So for this album I'm asking for your help. When you have a minute, stop by my Kickstarter page where you can check out a short video about the project (it even gives a very quick tour through the studio). There are also a bunch of incentives to go along with each donation. *Thank you, in advance, for supporting this album! Here's the link: Zach Hurd - 4th Studio Album</p>
+  <h1 class="sans-serif f4 fw9">09.20.13</h1>
+  <p class="f4 f3-ns serif lh-copy">I've been working on my 4th album over the past few months and now it's ready for the studio. I'm really excited about this one. For those of you who don't know, and I'm sure most of you do, making an album can be a big challenge financially. So for this album I'm asking for your help. When you have a minute, stop by my Kickstarter page where you can check out a short video about the project (it even gives a very quick tour through the studio). There are also a bunch of incentives to go along with each donation. *Thank you, in advance, for supporting this album! Here's the link: Zach Hurd - 4th Studio Album</p>
 </article>
   </div>
 </div>
@@ -85,7 +147,7 @@ controller: home
   <div class="mw8" style="margin-right: auto; margin-left: auto;">
     <div class="phm">
       <a href="mailto:zachhurdmusic@gmail.com" class="black">zachhurdmusic@gmail.com</a>
-      <ul class="list pln mtl">
+      <ul class="list mtl">
           <li class="dib"><a class="b f4 f3-ns black db prxs prs-ns" href="http://twitter.com/zachhurdmusic">@zachhurdmusic</a></li>
           <li class="dib"><a class="b f4 f3-ns black db paxs prs-ns" href="https://itunes.apple.com/us/artist/zach-hurd/id292321269?ign-mpt=uo%3D4">iTunes</a></li>
           <li class="dib"><a class="b f4 f3-ns black db paxs prs-ns" href="https://www.facebook.com/zachhurdmusic">Facebook</a></li>
@@ -97,5 +159,10 @@ controller: home
     </div>
   </div>
 </footer>
-{% endraw %}
 
+
+
+<script> var vm = new Vue({ el: '#vm' }); </script>
+
+</body>
+</html>
