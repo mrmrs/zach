@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include _head.html %}
+  <body>
+    <a href="{{post.url}}">
+      {{ post.date | date: "%-d %B %Y" }}
+      {{ page.show_time }}
+      {{ page.location }}
+    </a>
+     {% if page.contact_email %} <div>{{ page.contact_email }}</div>{% endif %}
+     {% if page.venue_name %} <div>{{ page.venue_name }}</div>{% endif %}
+     {% if page.venue_link %} <div>{{ page.venue_link }}</div>{% endif %}
+     {% if page.venue_map_link %} <div>{{ page.venue_map_link }}</div>{% endif %}
+    {{content}}
+
+    {% include _footer.html %}
+  </body>
+</html>
