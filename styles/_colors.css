@@ -6,6 +6,14 @@
 
 /* variables */
 :root {
+
+  --theme-0: #e9eee8;
+  --theme-1: #91a6ab;
+  --theme-2: #d3d9cb;
+  --theme-3: #c7cdc3;
+  --theme-4: #89a49f;
+  --theme-5: #8c9381;
+
   --black: #000;
   --near-black: #111;
   --dark-gray:#333;
@@ -65,4 +73,5 @@
   --lightest-purple: #d355ff;
   --dark-purple: #7b00a9;
   --darkest-purple: #5f008e;
+
 }

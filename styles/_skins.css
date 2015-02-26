@@ -19,6 +19,20 @@
 .near-white {    color: var(--near-white); }
 .white {         color: var(--white); }
 
+
+.theme-1 { color: var(--theme-1); }
+.theme-2 { color: var(--theme-2); }
+.theme-3 { color: var(--theme-3); }
+.theme-4 { color: var(--theme-4); }
+.theme-5 { color: var(--theme-5); }
+
+.bg-theme-0 { background-color: var(--theme-0); }
+.bg-theme-1 { background-color: var(--theme-1); }
+.bg-theme-2 { background-color: var(--theme-2); }
+.bg-theme-3 { background-color: var(--theme-3); }
+.bg-theme-4 { background-color: var(--theme-4); }
+.bg-theme-5 { background-color: var(--theme-5); }
+
 .blue { color: var(--blue); }
 .light-blue { color: var(--light-blue); }
 .lightest-blue { color: var(--lightest-blue); }

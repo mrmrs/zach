@@ -5,7 +5,7 @@
 */
 
 .link {
-  text-decoration: none;
+  text-decoration: none!important;
   transition: color .15s ease-in;
 }
 
@@ -17,6 +17,7 @@
 .link:hover   {
   color: #999999;
   transition: color .15s ease-in;
+  text-decoration:none!important;
 }
 .link:active  {
   color: #C4E3E0;
