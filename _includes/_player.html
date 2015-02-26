@@ -1,16 +1,15 @@
 {% raw %}
 <section class="bb b--near-white pbx">
-  <div class="t-center mw8 mtl">
-    <div class="phm ptl pbm">
-      <h1 class="sans-serif f4 fw4 ttu">Listen</h1>
+  <div class="t-center ptl phm mw8 " style="border-top-width: 1px;">
+    <div class="ptl pbm">
+      <h1 class="sans-serif f4 fw4 ttu " >Listen</h1>
     </div>
-    <div class="phm">
+    <div class="">
       <div class="bg-near-white ba b--near-white rounded wi-100" v-component="plangular" v-src="'http://soundcloud.com/zachhurdmusic/sets/zach-hurd'">
         <div class="p2 bg-white">
-          <div class="table">
-            <small class="monospace h6 table-cell nowrap">{{ currentTime | prettyTime }} - {{ duration | prettyTime }}</small>
+          <div class="table pvm">
+            <small class="monospace h6 table-cell nowrap tc">{{ currentTime | prettyTime }} - {{ duration | prettyTime }}</small>
           </div>
-          <h1 class="m0">{{ title }}</h1>
           <div class="table">
             <div class="table-cell">
               <button class="button-icon" v-on="click: previous()">
@@ -18,7 +17,7 @@
               </button>
             </div>
             <div class="table-cell">
-              <button class="h2 button-icon" v-on="click: playPause(player.playlistIndex)">
+              <button class="button-icon" v-on="click: playPause(player.playlistIndex)">
                 <svg v-if="player.tracks[player.i] != track || !player.playing" v-plangular-icon="'play'"></svg>
                 <svg v-if="player.tracks[player.i] == track && player.playing" v-plangular-icon="'pause'"></svg>
               </button>
@@ -36,7 +35,7 @@
           </div>
         </div>
         <div v-repeat="t : tracks" class="">
-          <a href="#{{ t.title }}" class="block px2 py1 nav-item"
+          <a href="#{{ t.title }}" class="block link px2 py1"
             v-on="click: playPause($index)"
             v-class="player.currentTrack == t ? 'bg-darken-3' : ''">
             {{ t.title }}

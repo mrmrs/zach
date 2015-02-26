@@ -4,24 +4,25 @@ layout: default
 
 {% include _header.html %}
 <main>
-<section class="mw8 phm t-center ptl">
-          <h1 class="sans-serif f4 fw4 ttu mbm tc tl-ns">Shows</h1>
-  {% for post in site.posts limit: 5  %}
-  <article class="mvs pvs mw8 bb b--light-gray">
-    <a href="{{post.url}}" class="tc tl-ns link dim">
-      <span class="db">
-        <span>{{ post.date | date: "%B %-d, %Y" }}</span>
-        <b>{{ post.show_time }}</b>
-      </span>
-      <span class="db">
-      <span>{{post.venue_name}}</span>
-      <span><b>{{post.city}}<b>, {{post.state}}</span>
-        </span>
+  <div class="bg-theme-0">
+    <section class="mw8 phm t-center ptl pbx bt b--white-50" style="border-top-width: 3px;">
+        <h1 class="sans-serif f4 fw4 ttu mbm tc tl-ns">Shows</h1>
+        {% for post in site.posts limit: 5  %}
+          <article class="mvs pvs mw8 bb b--light-gray">
+            <a href="{{post.url}}" class="tc tl-ns link dim">
+              <span class="db f4-ns">
+                <span>{{ post.date | date: "%B %-d, %Y" }}</span>
+                <b>{{ post.show_time }}</b>
+              </span>
+              <span class="db">
+                <span>{{post.venue_name}}</span>
+                <span><b>{{post.city}}</b>, {{post.state}}</span>
 
-    </a>
-</article>
-{% endfor %}
+            </a>
+        </article>
+      {% endfor %}
 </section>
+</div>
   {% include _player.html %}
   {% include _purchase.html %}
   {% include _about.html %}
