@@ -1,17 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
   {% include _head.html %}
-  <body>
-    <a href="{{post.url}}">
-      {{ post.date | date: "%-d %B %Y" }}
-      {{ page.show_time }}
-      {{ page.location }}
-    </a>
-     {% if page.contact_email %} <div>{{ page.contact_email }}</div>{% endif %}
-     {% if page.venue_name %} <div>{{ page.venue_name }}</div>{% endif %}
-     {% if page.venue_link %} <div>{{ page.venue_link }}</div>{% endif %}
-     {% if page.venue_map_link %} <div>{{ page.venue_map_link }}</div>{% endif %}
-    {{content}}
+  <body class="bg-theme-0">
+    <header class="tc tl-ns phm pts pbx phx-ns pt-ns bb b--light-gray bg-cv">
+      <div class="mw8 cf t-center">
+        <nav class="db wi-100 bb mbl">
+          <ul class="list dib tr-ns pln mln mtm">
+            <li class="db dib-ns mbm mbn-ns"><a class="link phn prm-ns bold f3 f4-ns
+                ttu" href="{{site.url}}/#home">Zach Hurd</a></li>
+            <li class="dib"><a class="link prm phm-ns f4" href="{{site.url}}/#shows">Shows</a></li>
+            <li class="dib"><a class="link phm f4" href="{{site.url}}/#music">Music</a></li>
+            <li class="dib"><a class="link phm f4" href="{{site.url}}/#about">About</a></li>
+            <li class="dib"><a class="link plm f4" href="{{site.url}}/#news">News</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="phm phn-l">
+      <article class="mw8 t-center bb b--black-05 bw5 pbxl">
+        <a href="{{post.url}}" class="link">
+          <span class="f4 dib">
+            <span class="ttu">{{ page.date | date: "%B %-d, %Y" }}</span>
+            <b>{{ page.show_time }}</b>
+          </span>
+          <span class="f4 f2-ns db b ttu">
+            {{ page.city }},
+            {{ page.state }}
+          </span>
+        </a>
+        {% if page.contact_email %} <div>{{ page.contact_email }}</div>{% endif %}
+        {% if page.venue_name %} <div>{{ page.venue_name }}</div>{% endif %}
+        {% if page.venue_link %} <div>{{ page.venue_link }}</div>{% endif %}
+        {% if page.venue_map_link %} <div>{{ page.venue_map_link }}</div>{% endif %}
+        <p>
+          {{content}}
+        </p>
+      </article>
+      <div class="mw8 t-center">
+        {% include _purchase.html %}
+      </div>
+    </main>
 
     {% include _footer.html %}
   </body>
